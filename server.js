@@ -1,4 +1,4 @@
-const io = require("socket.io")(3000);
+const io = require("socket.io")(process.env.PORT);
 console.log("*running on port 3000")
 //esablishing connection
 io.on("connection", (socket) => {
