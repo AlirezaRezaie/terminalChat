@@ -22,7 +22,7 @@ try:
 except Exception as e:
     if type(e) == requests.exceptions.ConnectionError:
         print("net nadari badbakht")
-    else: print("maybe vpn is on? ")
+    else: print("check for update failed")
     
 
 greetings_message = """
