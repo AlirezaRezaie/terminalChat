@@ -1,0 +1,31 @@
+import requests
+
+END_POINT = "https://api.github.com/repos/AlirezaRezaie/terminalChat/tags"
+AUTH_KEY = "token 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"
+
+
+class Github:
+    """  
+       github api client that has methods 
+       for accessing latest tags and commits
+     """
+    def __init__(self,endpoint,authkey):
+        self.endpoint = endpoint
+        self.authkey = authkey
+
+    def get_last_tag(self) -> str:
+        headers ={
+            "Authoriztion": self.authkey,
+        }
+
+        latest_tag = requests.post(self.endpoint,headers=headers).content
+        return latest_tag
+
+
+def check_for_update(tag):
+    needs_update = False
+    api_client = Github(END_POINT,AUTH_KEY)
+    print(api_client.get_last_tag())
+
+    if needs_update:
+        print("yala boro update kon 'git pull'")
