@@ -11,14 +11,14 @@ SECRET_KEY = b'QhbzOJ-fCq1CQhMUOXW1gmP0xvj1OkNOKTCntN_MBMY='
 
 # maybe there is no git repositoty
 try:
-    current_tag = subprocess.run(['git','describe','--tags'],stdout=subprocess.PIPE)
+    current_tag = subprocess.run(['git','tag'],stdout=subprocess.PIPE)
 except:
     pass
 
 
 # checking if newer version exists
 try:
-    check_for_update(current_tag)
+    check_for_update(current_tag.stdout.decode().split()[-1])
 except Exception as e:
     if type(e) == requests.exceptions.ConnectionError:
         print("net nadari badbakht")
