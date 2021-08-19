@@ -8,6 +8,7 @@ from cryptography.fernet import Fernet
 
 SECRET_KEY = b'QhbzOJ-fCq1CQhMUOXW1gmP0xvj1OkNOKTCntN_MBMY='
 
+
 # maybe there is no git repositoty
 try:
     current_tag = subprocess.run(['git','describe','--tags'],stdout=subprocess.PIPE)

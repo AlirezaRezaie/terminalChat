@@ -1,4 +1,5 @@
 import requests
+import json
 
 END_POINT = "https://api.github.com/repos/AlirezaRezaie/terminalChat/tags"
 AUTH_KEY = "token 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"
@@ -18,14 +19,16 @@ class Github:
             "Authoriztion": self.authkey,
         }
 
-        latest_tag = requests.post(self.endpoint,headers=headers).content
-        return latest_tag
+        latest_tag = requests.get(self.endpoint,headers=headers).content
+        return json.loads(latest_tag.decode('utf-8'))[0]["name"]
 
 
 def check_for_update(tag):
+    print("Checking for update")
     needs_update = False
     api_client = Github(END_POINT,AUTH_KEY)
-    print(api_client.get_last_tag())
-
-    if needs_update:
+    if api_client.get_last_tag() == tag:
+        needs_update = True
+    elif needs_update:
         print("yala boro update kon 'git pull'")
+    else: print("already up-to-date")
