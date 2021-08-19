@@ -29,6 +29,6 @@ def check_for_update(tag):
     api_client = Github(END_POINT,AUTH_KEY)
     if api_client.get_last_tag() != tag:
         needs_update = True
-    elif needs_update:
+    if needs_update:
         print("yala boro update kon 'git pull'")
     elif not needs_update: print("already up-to-date")
