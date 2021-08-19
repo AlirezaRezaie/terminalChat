@@ -6,13 +6,12 @@ from aioconsole import ainput
 from modules.check_for_update import check_for_update
 from cryptography.fernet import Fernet
 
-SECRET_KEY = b'QhbzOJ-fCq1CQhMUOXW1gmP0xvj1OkNOKTCntN_MBMY='
+SECRET_KEY = b'QhbzOJ-fCq1CQhMUOXW1gmP0xvj1OkNOKTCntN_MBMY=' # key for encrypting and decrypting messages
 
 
-# maybe there is no git repositoty
 try:
     current_tag = subprocess.run(['git','tag'],stdout=subprocess.PIPE)
-except:
+except:# catching the errors maybe there is no git repositoty
     pass
 
 
@@ -20,7 +19,7 @@ except:
 try:
     check_for_update(current_tag.stdout.decode().split()[-1])
 except Exception as e:
-    if type(e) == requests.exceptions.ConnectionError:
+    if type(e) == requests.exceptions.ConnectionError: # detecting network issues
         print("net nadari badbakht")
     else: print("check for update failed")
     
