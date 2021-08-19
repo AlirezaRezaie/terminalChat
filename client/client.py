@@ -1,6 +1,5 @@
 import asyncio
 import socketio
-import winsound
 import subprocess
 import requests
 from aioconsole import ainput
@@ -22,7 +21,7 @@ try:
 except Exception as e:
     if type(e) == requests.exceptions.ConnectionError:
         print("net nadari badbakht")
-    else: pass
+    else: print("maybe vpn is on? ")
     
 
 greetings_message = """
@@ -65,12 +64,10 @@ async def connect():
 async def success(event):
     if 'message' in event:
         print(f"<{event['author']}>{f.decrypt(event['message']).decode()}")
-        winsound.Beep(200,200)
 
     # waiting for the user to fill the input   
     client_messages = await ainput("")
     client_messages = f.encrypt(client_messages.encode())
-    print(client_messages)
         
     if client_messages == "quit":
         await sio.emit('disconnection',{"message":f"{client_name} left the room"})
